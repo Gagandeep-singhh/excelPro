@@ -9,10 +9,12 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Properties;
+import config.Constant;
 
 public class driver {
 
     public static Properties OR;
+
 
     public static ActionKeyword actionKeyword;
     public static Method method[];
@@ -51,33 +53,33 @@ public class driver {
     }
 
     private  void start() throws InvocationTargetException, IllegalAccessException {
-        excelReader excelConstruct = new excelReader("/Users/gagandeepsingh/IdeaProjects/ExcelPro/src/main/java/excel/dataEngine.xlsx");
+        excelReader excelConstruct = new excelReader(Constant.pathTestSuiteSheet);
 
-        int rowCount = excelConstruct.getRowCount("Test Cases");
+        int rowCount = excelConstruct.getRowCount(Constant.Sheet_TestCases);
         System.out.println(rowCount);
         for (int sRow=2;sRow<=rowCount;sRow++) {
-            SuitId = excelConstruct.getCellData("Test Cases", "TestCase ID", sRow);
-            suiteRunmode = excelConstruct.getCellData("Test Cases", "RunMode", sRow);
+            SuitId = excelConstruct.getCellData(Constant.Sheet_TestCases, Constant.Suite_TestCaseID, sRow);
+            suiteRunmode = excelConstruct.getCellData(Constant.Sheet_TestCases,Constant.Col_RunMode, sRow);
             if (suiteRunmode.equalsIgnoreCase("yes")){
 
-                excelConstruct= new excelReader("/Users/gagandeepsingh/IdeaProjects/ExcelPro/src/main/java/excel/"+SuitId+".xlsx");
-                int tCaseSheetRow = excelConstruct.getRowCount("Test Cases");
+                excelConstruct= new excelReader(Constant.pathTestCaseSheet+SuitId+".xlsx");
+                int tCaseSheetRow = excelConstruct.getRowCount(Constant.Sheet_TestCases);
                 System.out.println(tCaseSheetRow);
                 for (int tRow=2;tRow<=tCaseSheetRow;tRow++){
-                    tCaseId = excelConstruct.getCellData("Test Cases", "TestCase ID", tRow);
-                    tCaseRunmode = excelConstruct.getCellData("Test Cases", "RunMode", tRow);
+                    tCaseId = excelConstruct.getCellData(Constant.Sheet_TestCases, Constant.Suite_TestCaseID, tRow);
+                    tCaseRunmode = excelConstruct.getCellData(Constant.Sheet_TestCases, Constant.Col_RunMode, tRow);
                     if (tCaseRunmode.equalsIgnoreCase("yes")){
-                        int tCaseStepsRow = excelConstruct.getRowCount("Test Steps");
+                        int tCaseStepsRow = excelConstruct.getRowCount(Constant.Sheet_TestSteps);
                         System.out.println(tCaseStepsRow);
                         for (int tStep=2;tStep<=tCaseStepsRow;tStep++) {
 
-                            testCaseStepId = excelConstruct.getCellData("Test Steps", "TestCase ID", tStep);
+                            testCaseStepId = excelConstruct.getCellData(Constant.Sheet_TestSteps, Constant.TestCase_ScenarioID, tStep);
                             //System.out.println(testCaseStepId);
                             if (testCaseStepId.equalsIgnoreCase(tCaseId)) {
                                 //System.out.println(testCaseStepId);
-                                sActionKeyword = excelConstruct.getCellData("Test Steps","Action_Keyword",tStep);
-                                sPageObject = excelConstruct.getCellData("Test Steps","Page Object",tStep);
-                                sData = excelConstruct.getCellData("Test Steps","Data Set",tStep);
+                                sActionKeyword = excelConstruct.getCellData(Constant.Sheet_TestSteps,Constant.ActionKeyword,tStep);
+                                sPageObject = excelConstruct.getCellData(Constant.Sheet_TestSteps,Constant.PageObject,tStep);
+                                sData = excelConstruct.getCellData(Constant.Sheet_TestSteps,Constant.DataSet,tStep);
 
                                 System.out.print(sActionKeyword+" "+ sPageObject+" "+" "+sData);
                                 execute_Actions();
