@@ -26,9 +26,9 @@ public class Constant {
     public static final String ActionKeyword ="Action_Keyword" ;
     public static final String Col_RunMode ="RunMode" ;
 
-    public static final int Col_Result =3 ;
+    public static final String Col_Result ="Results" ;
     public static final String DataSet ="Data Set" ;
-    public static final int Col_TestStepResult =6 ;
+    public static final String Col_TestStepResult ="Results" ;
     public static final String KEYWORD_FAIL = "FAIL";
     public static final String KEYWORD_PASS = "PASS";
 

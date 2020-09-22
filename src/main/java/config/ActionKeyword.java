@@ -1,11 +1,13 @@
 package config;
 
+import excelUtil.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
-import static script.driver.*;
+import static script.Driver.*;
+import script.Driver;
 
 public class ActionKeyword {
 
@@ -17,13 +19,13 @@ public class ActionKeyword {
 
             String exePath = Constant.ChromeDriver_Path;
             System.setProperty("webdriver.chrome.driver", exePath);
-            //Log.info("Opening Browser");
+            Log.info("Opening Browser");
             driver = new ChromeDriver();
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }catch (Exception e){
-//            Log.info("Not able to open Browser --- " + e.getMessage());
-//            Driver.bResult=false;
+            Log.info("Not able to open Browser --- " + e.getMessage());
+            Driver.bResult=false;
         }
     }
 
@@ -32,11 +34,11 @@ public class ActionKeyword {
 
 
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-           // Log.info("Navigate to URL");
+            Log.info("Navigate to URL");
             driver.get(data);
         }catch (Exception e){
-//            Log.info("Not able to Navigate --- " + e.getMessage());
-//            Driver.bResult=false;
+            Log.info("Not able to Navigate --- " + e.getMessage());
+            Driver.bResult=false;
         }
     }
 
@@ -44,11 +46,11 @@ public class ActionKeyword {
         try {
 
 
-           // Log.info("Clickin on webelement" + object);
+            Log.info("Clickin on webelement" + object);
             driver.findElement(By.xpath(OR.getProperty(object))).click();
         }catch (Exception e){
-//            Log.info("Not able to Click --- " + e.getMessage());
-//            Driver.bResult=false;
+            Log.info("Not able to Click --- " + e.getMessage());
+            Driver.bResult=false;
         }
     }
 
@@ -56,11 +58,11 @@ public class ActionKeyword {
         try {
 
 
-            //Log.info("Entering data in field" + object);
+            Log.info("Entering data in field" + object);
             driver.findElement(By.xpath(OR.getProperty(object))).sendKeys(data);
         }catch (Exception e){
-//            Log.info("Not able to input --- " + e.getMessage());
-//            Driver.bResult=false;
+            Log.info("Not able to input --- " + e.getMessage());
+            Driver.bResult=false;
         }
     }
 
@@ -72,22 +74,22 @@ public class ActionKeyword {
         try {
 
 
-           // Log.info("Waiting "+ object);
+            Log.info("Waiting "+ object);
             Thread.sleep(Constant.wait);
         }catch (Exception e){
-//            Log.info("wait not work --- " + e.getMessage());
-//            Driver.bResult=false;
+            Log.info("wait not work --- " + e.getMessage());
+            Driver.bResult=false;
         }
     }
 
     public static void closeBrowser(String object, String data) {
         try {
 
-            //Log.info("Closing browser" + object);
+            Log.info("Closing browser" + object);
             driver.quit();
         }catch (Exception e){
-//            Log.info("Not able to close Browser --- " + e.getMessage());
-//            Driver.bResult=false;
+            Log.info("Not able to close Browser --- " + e.getMessage());
+            Driver.bResult=false;
         }
 
 
@@ -97,15 +99,15 @@ public class ActionKeyword {
         try {
 
 
-            //Log.info("Entering data in field" + object);
+            Log.info("Entering data in field" + object);
             String ActualTitle= driver.getTitle();
             String ExpectedTitle =data;
             //Assert.assertEquals(ExpectedTitle,ActualTitle);
 
 
         }catch (Exception e){
-//            Log.info("Not able to input --- " + e.getMessage());
-//            Driver.bResult=false;
+            Log.info("Not able to input --- " + e.getMessage());
+           Driver.bResult=false;
         }
     }
 
